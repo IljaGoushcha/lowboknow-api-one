@@ -8,7 +8,7 @@
     "port": 5432,
     "url": "",
     "database": "postgres",
-    "password": "",
+    "password": "elderson",
     "name": "postgreSQL",
     "user": "ig",
     "connector": "postgresql"
