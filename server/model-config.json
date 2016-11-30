@@ -31,5 +31,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "AppUser": {
+    "dataSource": "postgreSQL",
+    "public": true
   }
 }

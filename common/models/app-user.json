@@ -1,0 +1,85 @@
+{
+  "name": "AppUser",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "middleName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "dateOfBirth": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "emailVerified": {
+      "type": "boolean"
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "phoneNumberPrivate": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "primaryLanguage": {
+      "type": "string",
+      "required": true
+    },
+    "secondaryLanguage": {
+      "type": "string"
+    },
+    "householdSize": {
+      "type": "number"
+    },
+    "householdIncome": {
+      "type": "number"
+    },
+    "barNumber": {
+      "type": "string"
+    },
+    "barYear": {
+      "type": "string"
+    },
+    "biography": {
+      "type": "string"
+    },
+    "userTypeId": {
+      "type": "string",
+      "required": true
+    },
+    "questionnaireId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
