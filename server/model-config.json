@@ -35,5 +35,21 @@
   "AppUser": {
     "dataSource": "postgreSQL",
     "public": true
+  },
+  "UserType": {
+    "dataSource": "postgreSQL",
+    "public": true
+  },
+  "AppRole": {
+    "dataSource": "postgreSQL",
+    "public": true
+  },
+  "AreaOfLaw": {
+    "dataSource": "postgreSQL",
+    "public": true
+  },
+  "QuestionStatement": {
+    "dataSource": "postgreSQL",
+    "public": true
   }
 }

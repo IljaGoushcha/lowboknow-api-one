@@ -1,3 +1,146 @@
 /**
  * Created by ig on 11/29/16.
  */
+var async = require('async');
+
+module.exports = function(app) {
+
+  //data sources
+  var postgresDs = app.dataSources.postgreSQL;
+
+  //create all models
+  async.parallel({
+    userTypes: async.apply(createUserTypes),
+    appRoles: async.apply(createAppRoles),
+    areasOfLaws: async.apply(createAreasOfLaw),
+    questionStatement: async.apply(createQuestionsStatements)
+  }, function(err, results) {
+    if (err) throw err;
+
+    console.log('> models created sucessfully');
+    console.log(results);
+  });
+
+  //create userTypes
+  function createUserTypes(cb) {
+    postgresDs.automigrate('UserType', function(err) {
+      if (err) return cb(err);
+      var UserType = app.models.UserType;
+      UserType.create([{
+        value: 'admin',
+        id: 1
+      }, {
+        value: 'client',
+        id: 2
+      }, {
+        value: 'new-attorney',
+        id: 3
+      }, {
+        value: 'experienced-attorney',
+        id: 4
+      }, {
+        value: 'paralegal',
+        id: 5
+      }, {
+        value: 'new-attorney',
+        id: 6
+      }, {
+        value: 'prospect-attorney',
+        id: 7
+      }, {
+        value: 'prospect-client',
+        id: 8
+      }, {
+        value: 'student',
+        id: 9
+      }], cb);
+    });
+  }
+
+
+  //create appRoles
+  function createAppRoles(cb) {
+    postgresDs.automigrate('AppRole', function(err) {
+      if (err) return cb(err);
+      var AppRole = app.models.AppRole;
+      AppRole.create([{
+        value: 'case-author',
+        id: 1
+      }, {
+        value: 'lead-attorney-proboknow',
+        id: 2
+      }, {
+        value: 'lead-attorney-lowboknow',
+        id: 3
+      }, {
+        value: 'mentor',
+        id: 4
+      }], cb);
+    });
+  }
+
+  //create areasOfLaw
+  function createAreasOfLaw(cb) {
+    postgresDs.automigrate('AreaOfLaw', function(err) {
+      if (err) return cb(err);
+      var AreaOfLaw = app.models.AreaOfLaw;
+      AreaOfLaw.create([{
+        value: 'bankruptcy-law',
+        id: 1
+      }, {
+        value: 'consumer-law',
+        id: 2
+      }, {
+        value: 'employment-law',
+        id: 3
+      }, {
+        value: 'estate-law',
+        id: 4
+      }, {
+        value: 'family-law',
+        id: 5
+      }, {
+        value: 'health-law',
+        id: 6
+      }, {
+        value: 'housing-law',
+        id: 7
+      }, {
+        value: 'immigration-law',
+        id: 8
+      }, {
+        value: 'tax-law',
+        id: 9
+      }, {
+        value: 'tort-law',
+        id: 10
+      }, {
+        value: 'other',
+        id: 11
+      }], cb);
+    });
+  }
+
+  //create questionsStatements
+  function createQuestionsStatements(cb) {
+    postgresDs.automigrate('QuestionStatement', function(err) {
+      if (err) return cb(err);
+      var QuestionStatement = app.models.QuestionStatement;
+      QuestionStatement.create([{
+        value: 'I certify that these figures are accurate, and agree to provide proof of them if requested by an attorney considering representing me.',
+        id: 1
+      }, {
+        value: 'I further understand that Proboknow is neither a lawyer referral service nor a law firm – it neither recommends any particular attorney, nor provides representation itself. As such, Proboknow cannot, and does not, guarantee case outcomes or make any guarantees regarding representation.',
+        id: 2
+      }, {
+        value: 'Are you an active member of the California state bar, in good standing?',
+        id: 3
+      }, {
+        value: 'I certify that I have read, understand, and agree to the Terms of Use and Privacy Policy.',
+        id: 4
+      }], cb);
+    });
+  }
+
+
+};
