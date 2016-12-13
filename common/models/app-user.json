@@ -70,16 +70,25 @@
       "type": "string"
     },
     "userTypeId": {
-      "type": "string",
-      "required": true
-    },
-    "questionnaireId": {
-      "type": "string",
+      "type": "number",
       "required": true
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "userType": {
+      "type": "belongsTo",
+      "model": "UserType",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

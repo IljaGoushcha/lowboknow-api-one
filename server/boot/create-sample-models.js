@@ -13,7 +13,9 @@ module.exports = function(app) {
     userTypes: async.apply(createUserTypes),
     appRoles: async.apply(createAppRoles),
     areasOfLaws: async.apply(createAreasOfLaw),
-    questionStatement: async.apply(createQuestionsStatements)
+    questionStatement: async.apply(createQuestionsStatements),
+    appUsers: async.apply(createAppUsers),
+    addresses: async.apply(createAddresses)
   }, function(err, results) {
     if (err) throw err;
 
@@ -42,17 +44,14 @@ module.exports = function(app) {
         value: 'paralegal',
         id: 5
       }, {
-        value: 'new-attorney',
+        value: 'prospect-attorney',
         id: 6
       }, {
-        value: 'prospect-attorney',
+        value: 'prospect-client',
         id: 7
       }, {
-        value: 'prospect-client',
-        id: 8
-      }, {
         value: 'student',
-        id: 9
+        id: 8
       }], cb);
     });
   }
@@ -142,5 +141,53 @@ module.exports = function(app) {
     });
   }
 
+  //create appUsers
+  function createAppUsers(cb) {
+    postgresDs.automigrate('AppUser', function(err) {
+      if (err) return cb(err);
+      var AppUser = app.models.AppUser;
+      AppUser.create([{
+        firstName: 'Oleg',
+        lastName: 'Goushcha',
+        middleName: 'O',
+        dateOfBirth: '02/17/1985',
+        gender: 'male',
+        email: 'oleggou@yahoo.com',
+        emailVerified: true,
+        username: 'oleggou',
+        password: '1234',
+        phoneNumber: '7145958682',
+        phoneNUmberPrivate: true,
+        primaryLanguage: 'English',
+        secondaryLanguage: 'Ukrainian',
+        barNumber: '123412341234',
+        barYear: '2011',
+        biography: 'Right now I teach at Manhattan Colledge.',
+        userTypeId: 3,
+        id: 1
+      }], cb);
+    });
+  }
+
+  //create appUsers
+  function createAddresses(cb) {
+    postgresDs.automigrate('Address', function(err) {
+      if (err) return cb(err);
+      var Address = app.models.Address;
+      // QuestionStatement.create([{
+      //   value: 'I certify that these figures are accurate, and agree to provide proof of them if requested by an attorney considering representing me.',
+      //   id: 1
+      // }, {
+      //   value: 'I further understand that Proboknow is neither a lawyer referral service nor a law firm – it neither recommends any particular attorney, nor provides representation itself. As such, Proboknow cannot, and does not, guarantee case outcomes or make any guarantees regarding representation.',
+      //   id: 2
+      // }, {
+      //   value: 'Are you an active member of the California state bar, in good standing?',
+      //   id: 3
+      // }, {
+      //   value: 'I certify that I have read, understand, and agree to the Terms of Use and Privacy Policy.',
+      //   id: 4
+      // }], cb);
+    });
+  }
 
 };

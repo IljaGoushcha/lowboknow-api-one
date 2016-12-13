@@ -1,0 +1,61 @@
+{
+  "name": "Address",
+  "plural": "Addresses",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "isShipping": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "isBilling": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "lineOne": {
+      "type": "string",
+      "required": true
+    },
+    "lineTwo": {
+      "type": "string"
+    },
+    "lineThree": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "countyProvince": {
+      "type": "string"
+    },
+    "zipCode": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true,
+      "default": "USA"
+    },
+    "appUserId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "appUser": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "appUserId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
