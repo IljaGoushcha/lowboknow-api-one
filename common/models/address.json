@@ -49,13 +49,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "appUser": {
-      "type": "belongsTo",
-      "model": "AppUser",
-      "foreignKey": "appUserId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

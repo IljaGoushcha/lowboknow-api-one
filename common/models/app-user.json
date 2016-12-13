@@ -80,6 +80,17 @@
       "type": "belongsTo",
       "model": "UserType",
       "foreignKey": ""
+    },
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": ""
+    },
+    "areaOfLaws": {
+      "type": "hasMany",
+      "model": "AreaOfLaw",
+      "foreignKey": "",
+      "through": "LegalInterest"
     }
   },
   "acls": [

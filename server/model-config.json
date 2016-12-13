@@ -55,5 +55,9 @@
   "Address": {
     "dataSource": "postgreSQL",
     "public": true
+  },
+  "LegalInterest": {
+    "dataSource": "postgreSQL",
+    "public": true
   }
 }

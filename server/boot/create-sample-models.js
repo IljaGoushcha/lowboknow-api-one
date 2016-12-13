@@ -13,9 +13,10 @@ module.exports = function(app) {
     userTypes: async.apply(createUserTypes),
     appRoles: async.apply(createAppRoles),
     areasOfLaws: async.apply(createAreasOfLaw),
-    questionStatement: async.apply(createQuestionsStatements),
+    questionsStatements: async.apply(createQuestionsStatements),
     appUsers: async.apply(createAppUsers),
-    addresses: async.apply(createAddresses)
+    addresses: async.apply(createAddresses),
+    legalInterests: async.apply(createLegalInterests)
   }, function(err, results) {
     if (err) throw err;
 
@@ -157,7 +158,7 @@ module.exports = function(app) {
         username: 'oleggou',
         password: '1234',
         phoneNumber: '7145958682',
-        phoneNUmberPrivate: true,
+        phoneNumberPrivate: true,
         primaryLanguage: 'English',
         secondaryLanguage: 'Ukrainian',
         barNumber: '123412341234',
@@ -169,24 +170,42 @@ module.exports = function(app) {
     });
   }
 
-  //create appUsers
+  //create Addresses
   function createAddresses(cb) {
     postgresDs.automigrate('Address', function(err) {
       if (err) return cb(err);
       var Address = app.models.Address;
-      // QuestionStatement.create([{
-      //   value: 'I certify that these figures are accurate, and agree to provide proof of them if requested by an attorney considering representing me.',
-      //   id: 1
-      // }, {
-      //   value: 'I further understand that Proboknow is neither a lawyer referral service nor a law firm – it neither recommends any particular attorney, nor provides representation itself. As such, Proboknow cannot, and does not, guarantee case outcomes or make any guarantees regarding representation.',
-      //   id: 2
-      // }, {
-      //   value: 'Are you an active member of the California state bar, in good standing?',
-      //   id: 3
-      // }, {
-      //   value: 'I certify that I have read, understand, and agree to the Terms of Use and Privacy Policy.',
-      //   id: 4
-      // }], cb);
+      Address.create([{
+        isShipping: true,
+        isBilling: false,
+        lineOne: '21 Nopalitos Way',
+        city: 'Aliso Viejo',
+        countyProvince: 'Orange',
+        zipCode: '92656',
+        appUserId: 1,
+        id: 1
+      }], cb);
+    });
+  }
+
+  //create Legal Interests
+  function createLegalInterests(cb) {
+    postgresDs.automigrate('LegalInterest', function(err) {
+      if (err) return cb(err);
+      var LegalInterest = app.models.LegalInterest;
+      LegalInterest.create([{
+        appUserId: 1,
+        areaOfLawId: 1,
+        id: 1
+      }, {
+        appUserId: 1,
+        areaOfLawId: 2,
+        id: 2
+      }, {
+        appUserId: 1,
+        areaOfLawId: 3,
+        id: 3
+      }], cb);
     });
   }
 

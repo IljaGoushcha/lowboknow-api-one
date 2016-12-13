@@ -1,0 +1,22 @@
+{
+  "name": "LegalInterest",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "appUserId": {
+      "type": "number",
+      "required": true
+    },
+    "areaOfLawId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
