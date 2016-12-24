@@ -22,7 +22,32 @@ module.exports = function(app) {
 
     console.log('> models created sucessfully');
     console.log(results);
+    linkPrimaryKeys();
+
   });
+
+  function linkPrimaryKeys() {
+    console.log('***************');
+    async.series([function(cb) {
+      app.models.AppUser.find({filter: {where: {email: 'oleggou@yahoo.com'}}}, function(err, appUser) {
+        // console.log('***************');
+        // console.log('appUser', appUser);
+        // console.log('***************');
+        cb(null, appUser)
+      });
+    }, function(cb) {
+      app.models.Address.find({filter: {where: {lineOne: '21 Nopalitos Way'}}}, function(err, address) {
+        // console.log('***************');
+        // console.log('address', address);
+        // console.log('***************');
+        cb(null, address)
+      });
+    }], function(err, results) {
+      if (err) throw err;
+      console.log(results);
+    });
+
+  }
 
   //create userTypes
   function createUserTypes(cb) {
@@ -36,23 +61,20 @@ module.exports = function(app) {
         value: 'client',
         id: 2
       }, {
-        value: 'new-attorney',
+        value: 'attorney',
         id: 3
       }, {
-        value: 'experienced-attorney',
+        value: 'paralegal',
         id: 4
       }, {
-        value: 'paralegal',
+        value: 'prospect-attorney',
         id: 5
       }, {
-        value: 'prospect-attorney',
+        value: 'prospect-client',
         id: 6
       }, {
-        value: 'prospect-client',
-        id: 7
-      }, {
         value: 'student',
-        id: 8
+        id: 7
       }], cb);
     });
   }
